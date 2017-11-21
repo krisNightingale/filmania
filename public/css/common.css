@@ -1,0 +1,50 @@
+.my-btn,
+.my-btn:active,
+.my-btn:focus,
+.my-btn:active:focus{
+    background-color: rgba(136,139,145,0.5);
+    color: white;
+    border: none;
+    border-radius: 0;
+    margin-top: 33px;
+    font-size: medium;
+    outline: none;
+}
+
+.my-btn:hover {
+    background-color: #27ae60;
+    color: white;
+}
+
+/*****************films panel*************************/
+
+.bg-grey {
+    background-color: #e7e7e7;
+    height: 450px;
+}
+
+.card-film {
+    height: 380px;
+    margin-top: 1em;
+    margin-left: 0.5em;
+    display: inline-block;
+}
+
+.card-film:hover {
+    border-width: 2px;
+    border-color: #27ae60;
+}
+
+.film-pic {
+    height: 180px;
+}
+
+.film-description {
+    font-size: small;
+}
+
+.film-main {
+    margin-top: 1em;
+}
+
+/******************************************/

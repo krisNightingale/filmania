@@ -1,0 +1,85 @@
+.navbar-inverse {
+    border-radius: 0;
+    background-color: black;
+    height: auto;
+    border: none;
+}
+
+@font-face {
+    /*шрифт для лого*/
+    font-family: "Bauhaus 93";
+    src: url(../fonts/BAUHS93.TTF) format("TTF");
+
+    font-family: "MyriadPro";
+    src: url(../fonts/MyriadPro-Regular.otf) format("otf");
+}
+
+.logo {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 25px;
+    max-height: 50px;
+}
+
+.navbar .navbar-brand {
+    font-family: "Bauhaus 93";
+    font-size: xx-large;
+    color: white;
+    margin-top: 22px;
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar-form .form-control {
+        display: inline-block;
+        width: 250px;
+        vertical-align: middle;
+    }
+}
+
+@media only screen and (min-width: 850px) {
+    .navbar-form .form-control {
+        display: inline-block;
+        width: 300px;
+        vertical-align: middle;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1051px) {
+    .navbar-form .form-control {
+        display: inline-block;
+        width: 400px;
+    }
+}
+
+.menu {
+    width: 120px;
+}
+
+.nav > li > a {
+    padding: 15px 0px;
+}
+
+.navbar .navbar-nav >li >a {
+    color: white;
+    font-size: small;
+    /*font-family: "MyriadPro";*/
+}
+
+.navbar .navbar-nav > li > a:hover {
+    background-color: #27ae60;
+    text-decoration: underline;
+}
+
+.navbar .btn-default {
+    border: none;
+}
+
+.navbar .btn-default:hover {
+    background-color: #27ae60;
+    color: white;
+}
+
+.log-in {
+    margin-top: 22px;
+}

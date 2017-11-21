@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Film
@@ -15,8 +14,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $country
  * @property string $genre
  * @property float $rating
+ * @property string $poster
  * 
- * @property \Illuminate\Database\Eloquent\Collection $stuffs
+ * @property \Illuminate\Database\Eloquent\Collection $staffs
  * @property \Illuminate\Database\Eloquent\Collection $reviews
  * @property \Illuminate\Database\Eloquent\Collection $watchlists
  *
@@ -44,9 +44,9 @@ class Film extends Model
 		'rating'
 	];
 
-	public function stuffs()
+	public function staffs()
 	{
-		return $this->belongsToMany(Stuff::class);
+		return $this->hasManyThrough('staff', 'film_staff');
 	}
 
 	public function reviews()
@@ -58,4 +58,14 @@ class Film extends Model
 	{
 		return $this->hasMany(Watchlist::class);
 	}
+
+	public function poster()
+    {
+        return $this->belongsTo(Poster::class);
+    }
+
+    public function getPosterPath()
+    {
+        return asset('images/'.$this->poster()->first()->image_path);
+    }
 }

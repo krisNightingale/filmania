@@ -24,6 +24,6 @@ class Position extends Model
 
 	public function stuffs()
 	{
-		return $this->hasMany(Stuff::class);
+		return $this->hasMany(Staff::class);
 	}
 }
