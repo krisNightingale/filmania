@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top: 15px;">
         <div class="pull-left">
             <img src="{{$user->getPhotoPath()}}">
         </div>
@@ -19,214 +19,95 @@
 
 
     <div class="container-fluid genre-tab">
-        <p class="text-left genre-text">Мои фильмы</p>
-        <img src="style/pictures/arrow.png" alt="" class="pull-right icon-forward">
+        <p class="text-left genre-text">Просмотренные</p>
+        <a href="{{ url('/film/new') }}">
+            <img src="{{ asset('pictures/arrow.png')}}" alt="" class="pull-right icon-forward">
+        </a>
     </div>
 
     <div class="container-fluid bg-grey">
         <div class="row text-center">
-            <div class="col-sm-3">
-                <div class="thumbnail card-film">
-                    <img src="style/pictures/1.jpg" class="film-pic">
-                    <div class="film-main">
-                        <div class="pull-right rating">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
+            @foreach($watched as $film)
+                <div class="col-sm-2">
+                    <a href="{{url('/film/'.$film->id)}}">
+                    <div class="thumbnail card-film">
+                        <img src="{{$film->getPosterPath()}}" class="film-pic">
+                        <div class="film-main">
+                            <div class="pull-right rating">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                            </div>
+                            <p class="text-left"><strong>{{$film->name}}</strong></p>
                         </div>
-                        <p class="text-left"><strong>Family Guy</strong></p>
                     </div>
-                    <p class="text-left film-description">Разнообразный и богатый опыт
-                        укрепления иразвития структуры играет
-                        важную роль в формировании новых
-                        предложений. Не следует забывать, что
-                        дальнейшее развитие различных форм
-                        деятельности позволяет выполнять
-                        важные задания по разработке условий.
-                    </p>
+                    </a>
                 </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="thumbnail card-film">
-                    <img src="style/pictures/1.jpg" class="film-pic">
-                    <div class="film-main">
-                        <div class="pull-right rating">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                        </div>
-                        <p class="text-left"><strong>Family Guy</strong></p>
-                    </div>
-
-                    <p class="text-left film-description">Разнообразный и богатый опыт
-                        укрепления иразвития структуры играет
-                        важную роль в формировании новых
-                        предложений. Не следует забывать, что
-                        дальнейшее развитие различных форм
-                        деятельности позволяет выполнять
-                        важные задания по разработке условий.</p>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="thumbnail card-film">
-                    <img src="style/pictures/1.jpg" class="film-pic">
-                    <div class="film-main">
-                        <div class="pull-right rating">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                        </div>
-                        <p class="text-left"><strong>Family Guy</strong></p>
-                    </div>
-
-                    <p class="text-left film-description">Разнообразный и богатый опыт
-                        укрепления иразвития структуры играет
-                        важную роль в формировании новых
-                        предложений. Не следует забывать, что
-                        дальнейшее развитие различных форм
-                        деятельности позволяет выполнять
-                        важные задания по разработке условий.</p>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="thumbnail card-film">
-                    <img src="style/pictures/1.jpg" class="film-pic">
-                    <div class="film-main">
-                        <div class="pull-right rating">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                        </div>
-                        <p class="text-left"><strong>Family Guy</strong></p>
-                    </div>
-
-                    <p class="text-left film-description">Разнообразный и богатый опыт
-                        укрепления иразвития структуры играет
-                        важную роль в формировании новых
-                        предложений. Не следует забывать, что
-                        дальнейшее развитие различных форм
-                        деятельности позволяет выполнять
-                        важные задания по разработке условий.</p>
-                </div>
-            </div>
-    </div>
+            @endforeach
+        </div>
     </div>
 
     <div class="container-fluid genre-tab other">
         <p class="text-left genre-text">Хочу посмотреть</p>
-        <img src="style/pictures/arrow.png" alt="" class="pull-right icon-forward">
+        <a href="{{ url('/film/new') }}">
+            <img src="{{ asset('pictures/arrow.png')}}" alt="" class="pull-right icon-forward">
+        </a>
     </div>
 
     <div class="container-fluid bg-grey">
         <div class="row text-center">
-            <div class="col-sm-3">
-                <div class="thumbnail card-film">
-                    <img src="style/pictures/1.jpg" class="film-pic">
-                    <div class="film-main">
-                        <div class="pull-right rating">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
+            @foreach($wished as $film)
+                <div class="col-sm-2">
+                    <a href="{{url('/film/'.$film->id)}}">
+                    <div class="thumbnail card-film">
+                        <img src="{{$film->getPosterPath()}}" class="film-pic">
+                        <div class="film-main">
+                            <div class="pull-right rating">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                            </div>
+                            <p class="text-left"><strong>{{$film->name}}</strong></p>
                         </div>
-                        <p class="text-left"><strong>Family Guy</strong></p>
                     </div>
-                    <p class="text-left film-description">Разнообразный и богатый опыт
-                        укрепления иразвития структуры играет
-                        важную роль в формировании новых
-                        предложений. Не следует забывать, что
-                        дальнейшее развитие различных форм
-                        деятельности позволяет выполнять
-                        важные задания по разработке условий.
-                    </p>
+                    </a>
                 </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="thumbnail card-film">
-                    <img src="style/pictures/1.jpg" class="film-pic">
-                    <div class="film-main">
-                        <div class="pull-right rating">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                        </div>
-                        <p class="text-left"><strong>Family Guy</strong></p>
-                    </div>
-
-                    <p class="text-left film-description">Разнообразный и богатый опыт
-                        укрепления иразвития структуры играет
-                        важную роль в формировании новых
-                        предложений. Не следует забывать, что
-                        дальнейшее развитие различных форм
-                        деятельности позволяет выполнять
-                        важные задания по разработке условий.</p>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="thumbnail card-film">
-                    <img src="style/pictures/1.jpg" class="film-pic">
-                    <div class="film-main">
-                        <div class="pull-right rating">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                        </div>
-                        <p class="text-left"><strong>Family Guy</strong></p>
-                    </div>
-
-                    <p class="text-left film-description">Разнообразный и богатый опыт
-                        укрепления иразвития структуры играет
-                        важную роль в формировании новых
-                        предложений. Не следует забывать, что
-                        дальнейшее развитие различных форм
-                        деятельности позволяет выполнять
-                        важные задания по разработке условий.</p>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="thumbnail card-film">
-                    <img src="style/pictures/1.jpg" class="film-pic">
-                    <div class="film-main">
-                        <div class="pull-right rating">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                            <img src="style/pictures/star.png">
-                        </div>
-                        <p class="text-left"><strong>Family Guy</strong></p>
-                    </div>
-
-                    <p class="text-left film-description">Разнообразный и богатый опыт
-                        укрепления иразвития структуры играет
-                        важную роль в формировании новых
-                        предложений. Не следует забывать, что
-                        дальнейшее развитие различных форм
-                        деятельности позволяет выполнять
-                        важные задания по разработке условий.</p>
-                </div>
+            @endforeach
         </div>
-        </div>
-
     </div>
 
+    <div class="container-fluid genre-tab other">
+        <p class="text-left genre-text">Избранное</p>
+        <a href="{{ url('/film/new') }}">
+            <img src="{{ asset('pictures/arrow.png')}}" alt="" class="pull-right icon-forward">
+        </a>
+    </div>
+
+    <div class="container-fluid bg-grey">
+        <div class="row text-center">
+            @foreach($favorites as $film)
+                <div class="col-sm-2">
+                    <a href="{{url('/film/'.$film->id)}}">
+                    <div class="thumbnail card-film">
+                        <img src="{{$film->getPosterPath()}}" class="film-pic">
+                        <div class="film-main">
+                            <div class="pull-right rating">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                            </div>
+                            <p class="text-left"><strong>{{$film->name}}</strong></p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
 @endsection

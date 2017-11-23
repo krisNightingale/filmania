@@ -2,23 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Film;
 use App\Models\User;
+use App\Models\Watchlist;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getUserList(){
         $users = User::all()->get();
         return $users;
     }
 
-    public function getCurrentUser(Request $request){
-        $user = $request->user();
-        return view('user')->with(compact('user'));
-    }
-
     public function getUserById($id){
 
+    }
+
+    public function getMyProfile(Request $request){
+        $user = $request->user();
+        $watchlists = $user->watchlists()->get();
+        $watched = [];
+        $wished = [];
+        foreach ($watchlists as $watchlist){
+            if($watchlist->action_id == 1){
+                $watched[] = $watchlist->film()->first();
+            } elseif ($watchlist->action_id == 2){
+                $wished[] = $watchlist->film()->first();
+            }
+        }
+        $favorites = $user->favorites()->get();
+        return view('user')->with([
+            'user' => $user,
+            'watched' => $watched,
+            'wished' => $wished,
+            'favorites' => $favorites
+        ]);
     }
 
     public function userInfo(Request $request){
@@ -34,9 +58,8 @@ class UserController extends Controller
                 'first_name' => $first_name,
                 'last_name' => $last_name
             ]);
-        if ($user){
-            return view('user')->with(compact('user'));
-        }
+
+        return redirect(url('/user/me'));
     }
 
     public function setReview(Request $request){
@@ -51,5 +74,63 @@ class UserController extends Controller
                 'text' => $text,
                 'mark' => $mark,
             ]);
+    }
+
+    public function addToWishlist($id){
+        $user = request()->user();
+
+        $watchlist = $user->watchlists()->get()->where('film_id', '==', $id)->first();
+        if (!$watchlist){
+            $user->watchlists()->create([
+                'film_id' => $id,
+                'action_id' => 2,
+            ]);
+        } else {
+            $watchlist->update([
+                'action_id' => 2,
+            ]);
+        }
+        return redirect(url('/film/'.$id));
+    }
+
+    public function removeFromWatchlist($id){
+        $user = request()->user();
+        $watchlist = $user->watchlists()->get()->where('film_id', '==', $id)->first();
+        $watchlist->delete();
+
+        return redirect(url('/film/'.$id));
+    }
+
+    public function addToFavorites($id){
+        $user = request()->user();
+
+        if ($user->hasWatched($id)){
+            $user->favorites()->attach($id);
+        }
+        return redirect(url('/film/'.$id));
+    }
+
+    public function removeFromFavorites($id){
+        $user = request()->user();
+        $user->favorites()->detach($id);
+
+        return redirect(url('/film/'.$id));
+    }
+
+    public function addToWatched($id){
+        $user = request()->user();
+
+        $watchlist = $user->watchlists()->get()->where('film_id', '==', $id)->first();
+        if (!$watchlist){
+            $user->watchlists()->create([
+                'film_id' => $id,
+                'action_id' => 1,
+            ]);
+        } else {
+            $watchlist->update([
+                'action_id' => 1,
+            ]);
+        }
+        return redirect(url('/film/'.$id));
     }
 }

@@ -1,0 +1,130 @@
+.main-area {
+    margin-top: 20px;
+    padding-left: 0px;
+}
+
+.about-film {
+    margin-right: 0;
+    margin-bottom: 40px;
+}
+
+.film-area {
+    padding-left: 0;
+}
+
+.film-poster {
+    width: 300px;
+    height: 420px;
+}
+
+.film-name {
+    font-size: large;
+    margin-bottom: 0;
+}
+
+.rating {
+    margin-bottom: 20px;
+}
+
+.btn-block {
+}
+
+.btn-area {
+    margin-left: 15px;
+    width: 270px;
+    padding: 0;
+}
+
+.want-btn {
+    width: 150px;
+    padding: 1em 0em 1em 0em;
+}
+
+.watched-btn {
+    width: 100px;
+    padding: 1em 0em 1em 0em;
+}
+
+.fav_icon {
+    width: 35px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.review-tab {
+    margin-top: 40px;
+    margin-left: -40px;
+    padding-left: 60px;
+}
+
+.comment-zone {
+    margin-top: 20px;
+    padding-left: 20px;
+    margin-right: -15px;
+}
+
+.ava {
+    margin-top: 20px;
+    width:70px;
+    height: 70px;
+}
+
+.send-btn {
+    padding: 1em 2em 1em 2em;
+    margin-top: 20px;
+    margin-right: 15px;
+}
+
+.recom-block {
+    border: solid 1px black;
+    padding: 1.5em 0.1em 1.5em 0.1em;
+    margin-top: 40px;
+}
+
+.recom-card {
+    margin-bottom: 20px;
+    height: 250px;
+}
+
+.recom-text {
+    padding-left: 20px;
+    height: 250px;
+}
+
+.recom-poster {
+    width: 200px;
+    height: 250px;
+}
+
+.my-btn-film {
+    background-color: black;
+    padding: 0.5em 2em 0.5em 2em;
+    margin-top: 0;
+}
+
+.comments {
+    margin-left: 20px;
+}
+
+.comment {
+    margin-bottom: 20px;
+}
+
+.comment-text {
+    margin-left: 60px;
+}
+
+.space {
+    height: 40px;
+}
+
+.comment-ava {
+    width: 150px;
+    height: 150px;
+}
+
+.date {
+    bottom: inherit;
+    color: #c4c1c1;
+}

@@ -17,27 +17,50 @@ class FilmController extends Controller
 
         $films = Film::skip($offset)->take($limit)->get();
 
-        return view('main')->with(compact('films'));
+        return view('film_list')->with(compact('films'));
     }
 
-    public function getMain(Request $request){
-        $limit = 4;
+    public function getMain(){
+        $limit = 6;
         $top = Film::orderByRaw('rating DESC')
             ->take($limit)
             ->get();
-        $newest = Film::orderByRaw('id DESC')
+        $new = Film::orderByRaw('id DESC')
             ->take($limit)
             ->get();
 
-        return view('main')->with(['top' => $top, 'newest' => $newest]);
+        return view('main')->with(['top' => $top, 'new' => $new]);
     }
 
-    public function getFilmById(Request $request){
-        $filmId = $request->segment(count(request()->segments()));
-        $film = Film::find($filmId);
+    public function searchFilm(Request $request){
+        $name = $request->query('name');
 
-        $header = [ 'Content-Type' => 'application/json; charset=utf-8' ];
-        return response()->json($film, 200, $header, JSON_UNESCAPED_UNICODE);
+        $films = Film::where('name', 'like', "%".$name."%")->get();
+        return view('film_list')->with(['films' => $films]);
+    }
+
+    public function searchFilmByGenre(Request $request){
+        $name = $request->query('genre');
+
+        $films = Film::where('genre', 'like', "%".$name."%")->get();
+        return view('film_list')->with(['films' => $films]);
+    }
+
+    public function getTop(){
+        $top = Film::orderByRaw('rating DESC')->get();
+        return view('film_list')->with(['films' => $top]);
+    }
+
+    public function getNew(){
+        $new = Film::orderByRaw('release_year DESC')->get();
+        return view('film_list')->with(['films' => $new]);
+    }
+
+    public function getFilmById($id){
+        $film = Film::find($id);
+        $user = request()->user();
+        $reviews = $film->reviews()->get();
+        return view('film')->with(compact('film', 'user', 'reviews'));
     }
 
     public function updateMark(Request $request){

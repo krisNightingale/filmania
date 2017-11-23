@@ -21,6 +21,10 @@
     max-height: 50px;
 }
 
+.navbar-inverse {
+    margin-bottom: 0;
+}
+
 .navbar .navbar-brand {
     font-family: "Bauhaus 93";
     font-size: xx-large;

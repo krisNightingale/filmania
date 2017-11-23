@@ -47,16 +47,16 @@
 
     <div class="container-fluid genre-tab">
         <p class="text-left genre-text">Новинки</p>
+        <a href="{{ url('/film/new') }}">
         <img src="{{ asset('pictures/arrow.png')}}" alt="" class="pull-right icon-forward">
+        </a>
     </div>
 
     <div class="container-fluid bg-grey">
-
-            @foreach($top as $film)
-            @if($loop->index % 4 == 0)
-                <div class="row text-center">
-            @endif
-                <div class="col-sm-3">
+        <div class="row text-center">
+            @foreach($new as $film)
+                <div class="col-sm-2">
+                    <a href="{{url('/film/'.$film->id)}}">
                     <div class="thumbnail card-film">
                         <img src="{{$film->getPosterPath()}}" class="film-pic">
                         <div class="film-main">
@@ -70,18 +70,42 @@
                             <p class="text-left"><strong>{{$film->name}}</strong></p>
                         </div>
                     </div>
+                    </a>
                 </div>
-            @if($loop->index % 4 == 3)
-                </div>
-            @endif
             @endforeach
-
+        </div>
     </div>
 
     <div class="container-fluid genre-tab other">
         <p class="text-left genre-text">Топ просмотров</p>
+        <a href="{{ url('/film/top') }}">
         <img src="{{ asset('pictures/arrow.png')}}" alt="" class="pull-right icon-forward">
+        </a>
     </div>
 
+    <div class="container-fluid bg-grey">
+        <div class="row text-center">
+            @foreach($top as $film)
+                <div class="col-sm-2">
+                    <a href="{{url('/film/'.$film->id)}}">
+                    <div class="thumbnail card-film">
+                        <img src="{{$film->getPosterPath()}}" class="film-pic">
+                        <div class="film-main">
+                            <div class="pull-right rating">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                                <img src="{{asset('pictures/star.png')}}">
+                            </div>
+                            <p class="text-left"><strong>{{$film->name}}</strong></p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+    </div>
 
 @endsection

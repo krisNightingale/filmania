@@ -28,11 +28,8 @@ class Film extends Model
 
 	protected $casts = [
 		'duration' => 'int',
-		'rating' => 'float'
-	];
-
-	protected $dates = [
-		'release_year'
+		'rating' => 'float',
+        'release_year' => 'int'
 	];
 
 	protected $fillable = [
@@ -41,12 +38,13 @@ class Film extends Model
 		'duration',
 		'country',
 		'genre',
-		'rating'
+		'rating',
+        'description'
 	];
 
-	public function staffs()
+	public function staff()
 	{
-		return $this->hasManyThrough('staff', 'film_staff');
+		return $this->belongsToMany(Staff::class, 'film_staff');
 	}
 
 	public function reviews()
