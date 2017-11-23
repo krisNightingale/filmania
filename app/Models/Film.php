@@ -66,4 +66,20 @@ class Film extends Model
     {
         return asset('images/'.$this->poster()->first()->image_path);
     }
+
+    public function updateRating()
+    {
+	    $watchlists = $this->watchlists()->get()->all();
+	    $total = 0;
+	    $count = 0;
+	    foreach ($watchlists as $watchlist){
+	        if ($watchlist->mark != 0){
+                $total += $watchlist->mark;
+                $count++;
+            }
+        }
+        $total = $total/$count;
+        $this->rating = $total;
+        $this->update();
+    }
 }

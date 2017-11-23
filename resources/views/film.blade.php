@@ -11,11 +11,16 @@
                     <div class="col-sm-7">
                         <p class="film-name">{{$film->name}}</p>
                         <div class="rating">
-                            <img src="{{ asset('pictures/star.png')}}">
-                            <img src="{{ asset('pictures/star.png')}}">
-                            <img src="{{ asset('pictures/star.png')}}">
-                            <img src="{{ asset('pictures/star.png')}}">
-                            <img src="{{ asset('pictures/star.png')}}">
+                            @for($i=1; $i<=$mark; $i++)
+                                <a href="{{ url('/user/film/'.$film->id.'/rate/'.$i) }}">
+                                    <img src="{{ asset('pictures/star.png')}}">
+                                </a>
+                            @endfor
+                            @for($i=$mark + 1; $i<=5; $i++)
+                                <a href="{{ url('/user/film/'.$film->id.'/rate/'.$i) }}">
+                                    <img src="{{ asset('pictures/nstar.png')}}">
+                                </a>
+                            @endfor
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -26,6 +31,7 @@
                         @endif
                     </div>
                 </div>
+                <p>Рейтинг: {{$film->rating}}</p>
                 <p>Премьера: {{$film->release_year}}</p>
                 <p>Длительность: {{$film->duration}} минут</p>
                 <p>Жанр: {{$film->genre}}</p>
@@ -52,7 +58,7 @@
                         @endif
                     </div>
                     <div class="col-sm-6">
-                        @if(Auth::user()->hasInWishlist($film->id) && !Auth::user()->hasWatched($film->id))
+                        @if(!Auth::user()->hasWatched($film->id))
                             <form method="get" action="{{ url('/user/film/'.$film->id.'/watch') }}">
                                 <button type="submit" class="btn btn-default continue-btn watched-btn pull-right">Смотрел</button>
                             </form>
@@ -88,12 +94,14 @@
             <div class="col-sm-2">
                 <img src="{{ asset('pictures/ava.png')}}" alt="" class="ava center-block">
             </div>
+            <form method="post" action="{{ url('user/film/'.$film->id.'/review') }}">
+                {{ csrf_field() }}
+                <div class="col-sm-10 input-comment">
+                    <textarea name="text" class="form-control" rows="5" placeholder="Оставьте свой комментарий..."></textarea>
+                </div>
 
-            <div class="col-sm-10 input-comment">
-                <textarea class="form-control" rows="5" placeholder="Оставьте свой комментарий..."></textarea>
-            </div>
-
-            <a href="#page-intro" class="btn btn-default continue-btn send-btn pull-right" >Отправить</a>
+                <button type="submit" class="btn btn-default continue-btn send-btn pull-right" >Отправить</button>
+            </form>
         </div>
 
     </div>
@@ -102,68 +110,31 @@
         <p class="film-name">Рекомендуем</p>
 
         <div class="recom-block col-sm-12">
+            @foreach($recommends as $recommend)
             <div class="recom-card">
                 <div class="col-sm-6">
-                    <img src="{{ asset('pictures/poster2.jpg')}}" alt="" class="recom-poster">
+                    <img src="{{$recommend->getPosterPath()}}" alt="" class="recom-poster">
                 </div>
 
                 <div class="col-sm-6 recom-text">
-                    <p>Название фильма</p>
-                    <p>Премьера: 19 марта 2017</p>
-                    <p>Длительность: 97 минут</p>
+                    <p>{{$recommend->name}}</p>
+                    <p>Премьера: {{$recommend->release_year}}</p>
+                    <p>Длительность: {{$recommend->duration}} минут</p>
                     <div class="rating">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
+                        @for($i=1; $i<=$recommend->rating; $i++)
+                            <img src="{{ asset('pictures/star.png')}}">
+                        @endfor
+                        @for($i=$recommend->rating + 1; $i<=5; $i++)
+                            <img src="{{ asset('pictures/nstar.png')}}">
+                        @endfor
                     </div>
 
-                    <a href="#page-intro" class="btn btn-default my-btn my-btn-film">Перейти</a>
+                    <a href="{{url('/film/'.$recommend->id)}}">
+                        <button class="btn btn-default my-btn">Перейти</button>
+                    </a>
                 </div>
             </div>
-
-            <div class="recom-card">
-                <div class="col-sm-6">
-                    <img src="{{ asset('pictures/poster2.jpg')}}" alt="" class="recom-poster">
-                </div>
-
-                <div class="col-sm-6 recom-text">
-                    <p>Название фильма</p>
-                    <p>Премьера: 19 марта 2017</p>
-                    <p>Длительность: 97 минут</p>
-                    <div class="rating">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                    </div>
-
-                    <a href="#page-intro" class="btn btn-default my-btn my-btn-film">Перейти</a>
-                </div>
-            </div>
-
-            <div>
-                <div class="col-sm-6">
-                    <img src="{{ asset('pictures/poster2.jpg')}}" alt="" class="recom-poster">
-                </div>
-
-                <div class="col-sm-6 recom-text">
-                    <p>Название фильма</p>
-                    <p>Премьера: 19 марта 2017</p>
-                    <p>Длительность: 97 минут</p>
-                    <div class="rating">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                        <img src="{{ asset('pictures/star.png')}}">
-                    </div>
-
-                    <a href="#page-intro" class="btn btn-default my-btn my-btn-film">Перейти</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

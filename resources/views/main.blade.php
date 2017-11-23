@@ -7,10 +7,10 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <img src="{{ asset('pictures/1.jpg')}}" class="img-responsive">
+                <img src="{{ asset('pictures/3.jpg')}}" class="img-responsive">
                 <div class="carousel-caption">
-                    <h3 class="col-md-8 col-md-offset-2 text-center">Побег из Шоушенка</h3>
-                    <p class="col-md-8 col-md-offset-2 text-center">Шоушенк — название тюрьмы. И если тебе нет еще 30-ти, а ты получаешь пожизненное, то приготовься к худшему: для тебя выхода из Шоушенка не будет!</p>
+                    <h3 class="col-md-8 col-md-offset-2 text-center">Бегущий по лезвию</h3>
+                    <p class="col-md-8 col-md-offset-2 text-center">Отставной детектив Рик Декард вновь восстановлен в полиции Лос-Анджелеса для поиска возглавляемой Роем Батти группы киборгов, совершившей побег из космической колонии на Землю.</p>
                     <div class="col-md-8 col-md-offset-2 hover-slide text-center">
                         <a href="#page-intro" class="btn btn-default continue-btn">Подробнее</a>
                     </div>
@@ -61,11 +61,12 @@
                         <img src="{{$film->getPosterPath()}}" class="film-pic">
                         <div class="film-main">
                             <div class="pull-right rating">
-                                <img src="{{asset('pictures/star.png')}}">
-                                <img src="{{asset('pictures/star.png')}}">
-                                <img src="{{asset('pictures/star.png')}}">
-                                <img src="{{asset('pictures/star.png')}}">
-                                <img src="{{asset('pictures/star.png')}}">
+                                @for($i=1; $i<=$film->rating; $i++)
+                                    <img src="{{ asset('pictures/star.png')}}">
+                                @endfor
+                                @for($i=$film->rating + 1; $i<=5; $i++)
+                                    <img src="{{ asset('pictures/nstar.png')}}">
+                                @endfor
                             </div>
                             <p class="text-left"><strong>{{$film->name}}</strong></p>
                         </div>
@@ -92,11 +93,12 @@
                         <img src="{{$film->getPosterPath()}}" class="film-pic">
                         <div class="film-main">
                             <div class="pull-right rating">
-                                <img src="{{asset('pictures/star.png')}}">
-                                <img src="{{asset('pictures/star.png')}}">
-                                <img src="{{asset('pictures/star.png')}}">
-                                <img src="{{asset('pictures/star.png')}}">
-                                <img src="{{asset('pictures/star.png')}}">
+                                @for($i=1; $i<=$film->rating; $i++)
+                                    <img src="{{ asset('pictures/star.png')}}">
+                                @endfor
+                                @for($i=$film->rating + 1; $i<=5; $i++)
+                                    <img src="{{ asset('pictures/nstar.png')}}">
+                                @endfor
                             </div>
                             <p class="text-left"><strong>{{$film->name}}</strong></p>
                         </div>

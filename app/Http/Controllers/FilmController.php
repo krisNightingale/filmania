@@ -60,7 +60,10 @@ class FilmController extends Controller
         $film = Film::find($id);
         $user = request()->user();
         $reviews = $film->reviews()->get();
-        return view('film')->with(compact('film', 'user', 'reviews'));
+        $recommends = Film::orderByRaw('rating DESC')->take(3)->get();
+        $mark = $user->watchlists()->get()->where('film_id', '==', $id)->first()->mark;
+
+        return view('film')->with(compact('film', 'user', 'reviews', 'recommends', 'mark'));
     }
 
     public function updateMark(Request $request){

@@ -62,18 +62,27 @@ class UserController extends Controller
         return redirect(url('/user/me'));
     }
 
-    public function setReview(Request $request){
-        $user_id = $request->user_id;
-        $film_id = $request->film_id;
-        $text = $request->text;
-        $mark = $request->mark;
+    public function setReview($id){
+        $user = request()->user();
+        $text = request('text');
 
-        $user = User::find($user_id)
-            ->reviews()->create([
-                'film_id' => $film_id,
-                'text' => $text,
-                'mark' => $mark,
-            ]);
+        $user->reviews()->create([
+            'film_id' => $id,
+            'text' => $text,
+        ]);
+
+        return redirect(url('/film/'.$id));
+    }
+
+    public function setRating($film_id, $rating){
+        $user = request()->user();
+        $watchlist = $user->watchlists()->get()->where('film_id', '==', $film_id)->first();
+        $watchlist->update([
+            'mark' => $rating,
+        ]);
+        Film::find($film_id)->updateRating();
+
+        return redirect(url('/film/'.$film_id));
     }
 
     public function addToWishlist($id){

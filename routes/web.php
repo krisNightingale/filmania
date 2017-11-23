@@ -20,7 +20,7 @@ Route::group(['prefix' => 'film'], function () {
     Route::get('/new', 'FilmController@getNew');
     Route::get('/search', 'FilmController@searchFilm');
     Route::get('/genre', 'FilmController@searchFilmByGenre');
-    Route::get('/{id}', 'FilmController@getFilmById');
+    Route::get('/{id}', 'FilmController@getFilmById')->middleware('auth');
     Route::post('/{film_id}/user/{user_id}', 'FilmController@addToWatchlist');
 });
 
@@ -30,12 +30,13 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/info', 'UserController@userInfo');
     Route::post('/info', 'UserController@updateUserInfo');
     Route::get('/collections', 'UserController@getMyProfile');
-    Route::post('/{user_id}/film/{film_id}/review', 'UserController@setReview');
+    Route::post('/film/{id}/review', 'UserController@setReview');
     Route::get('/film/{id}/add', 'UserController@addToWishlist');
     Route::get('/film/{id}/watch', 'UserController@addToWatched');
     Route::post('/film/{id}/remove', 'UserController@removeFromWatchlist');
     Route::get('/film/{id}/like', 'UserController@addToFavorites');
     Route::get('/film/{id}/unlike', 'UserController@removeFromFavorites');
+    Route::get('/film/{film_id}/rate/{rating}', 'UserController@setRating');
 });
 
 Route::group(['prefix' => 'admin'], function () {

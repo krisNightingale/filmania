@@ -18,11 +18,12 @@
                     <img src="{{$film->getPosterPath()}}" class="film-pic">
                     <div class="film-main">
                         <div class="pull-right rating">
-                            <img src="{{asset('pictures/star.png')}}">
-                            <img src="{{asset('pictures/star.png')}}">
-                            <img src="{{asset('pictures/star.png')}}">
-                            <img src="{{asset('pictures/star.png')}}">
-                            <img src="{{asset('pictures/star.png')}}">
+                            @for($i=1; $i<=$film->rating; $i++)
+                                <img src="{{ asset('pictures/star.png')}}">
+                            @endfor
+                            @for($i=$film->rating + 1; $i<=5; $i++)
+                                <img src="{{ asset('pictures/nstar.png')}}">
+                            @endfor
                         </div>
                         <p class="text-left"><strong>{{$film->name}}</strong></p>
                     </div>
