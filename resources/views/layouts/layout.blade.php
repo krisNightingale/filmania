@@ -43,7 +43,7 @@
                 <div class="col-sm-6">
                     <form class="navbar-form" method="get" action="{{ url('/film/search') }}">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" placeholder="Поиск">
+                            <input name="search" type="text" class="form-control" placeholder="Поиск">
                         </div>
                         <button type="submit" class="btn btn-default">
                             <span class="glyphicon glyphicon-search search"></span>
@@ -60,8 +60,13 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url('/film/genre?genre=омедия') }}">Комедия</a></li>
-                                <li><a href="#">Мелодрамма</a></li>
-                                <li><a href="#">Ужасы</a></li>
+                                <li><a href="{{ url('/film/genre?genre=елодрама') }}">Мелодрама</a></li>
+                                <li><a href="{{ url('/film/genre?genre=жасы') }}">Ужасы</a></li>
+                                <li><a href="{{ url('/film/genre?genre=риминал') }}">Кримимнал</a></li>
+                                <li><a href="{{ url('/film/genre?genre=энтези') }}">Фэнтези</a></li>
+                                <li><a href="{{ url('/film/genre?genre=рама') }}">Драма</a></li>
+                                <li><a href="{{ url('/film/genre?genre=риллер') }}">Триллер</a></li>
+                                <li><a href="{{ url('/film/genre?genre=иография') }}">Биография</a></li>
                             </ul>
                         </li>
                         @if(Auth::check() && Auth::user()->isAdmin())

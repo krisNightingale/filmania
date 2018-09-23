@@ -35,6 +35,7 @@
                 <p>Премьера: {{$film->release_year}}</p>
                 <p>Длительность: {{$film->duration}} минут</p>
                 <p>Жанр: {{$film->genre}}</p>
+                <p>Страна: {{$film->country}}</p>
                 @foreach($film->staff()->get() as $staff)
                     <p>{{$staff->position()->first()->name}}: {{$staff->first_name}} {{$staff->last_name}}</p>
                 @endforeach

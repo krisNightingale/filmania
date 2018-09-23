@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
+use App\Models\Staff;
 use App\Models\Watchlist;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,9 +34,19 @@ class FilmController extends Controller
     }
 
     public function searchFilm(Request $request){
-        $name = $request->query('name');
+        $name = $request->query('search');
 
-        $films = Film::where('name', 'like', "%".$name."%")->get();
+        $films = Film::where('name', 'like', "%".$name."%")->get()->all();
+        if (count($films) == 0){
+            $films = Film::where('release_year', '=', intval($name))->get()->all();
+        }
+        if (count($films) == 0){
+            $films = Film::where('country', 'like', "%".$name."%")->get()->all();
+        }
+        if (count($films) == 0){
+            $films = Film::where('rating', '=', $name)->get()->all();
+        }
+
         return view('film_list')->with(['films' => $films]);
     }
 
@@ -61,7 +72,9 @@ class FilmController extends Controller
         $user = request()->user();
         $reviews = $film->reviews()->get();
         $recommends = Film::orderByRaw('rating DESC')->take(3)->get();
-        $mark = $user->watchlists()->get()->where('film_id', '==', $id)->first()->mark;
+        if ($user->watchlists()->get()->where('film_id', '==', $id)->first())
+            $mark = $user->watchlists()->get()->where('film_id', '==', $id)->first()->mark;
+        else $mark = 0;
 
         return view('film')->with(compact('film', 'user', 'reviews', 'recommends', 'mark'));
     }
